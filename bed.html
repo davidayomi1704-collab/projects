@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Home Decor Set</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: #292b25;
+        background: #faf9f6;
+        font-family: 'DM Sans', sans-serif;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      main {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 30px 24px 80px;
+      }
+
+      .product {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr);
+        gap: 64px;
+        align-items: start;
+      }
+
+      .gallery img {
+        display: block;
+        width: 100%;
+        height: 600px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+
+      .thumbs {
+        display: flex;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .thumbs img {
+        width: 76px;
+        height: 76px;
+        object-fit: cover;
+        border-radius: 3px;
+        opacity: 0.65;
+        cursor: pointer;
+      }
+
+      .thumbs img.selected {
+        outline: 1px solid #303b31;
+        outline-offset: 3px;
+        opacity: 1;
+      }
+
+      .details {
+        padding-top: 22px;
+      }
+
+      .eyebrow {
+        color: #7b806f;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 13px 0 10px;
+        font: 500 39px/1.18 'Playfair Display', serif;
+      }
+
+      .rating {
+        color: #ba8b4b;
+        font-size: 14px;
+      }
+
+      .rating span {
+        color: #77796f;
+        margin-left: 8px;
+        font-size: 13px;
+      }
+
+      .price {
+        margin: 22px 0;
+        font-size: 21px;
+        font-weight: 600;
+      }
+
+      .description {
+        max-width: 430px;
+        color: #6e7068;
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      .rule {
+        border: 0;
+        border-top: 1px solid #e5e3dc;
+        margin: 27px 0;
+      }
+
+      .purchase {
+        display: flex;
+        margin-top: 28px;
+      }
+
+      button {
+        min-height: 52px;
+        border: 0;
+        cursor: pointer;
+        font: inherit;
+      }
+
+      .primary {
+        flex: 1;
+        color: #fff;
+        background: #303b31;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+
+      .primary:hover {
+        background: #465448;
+      }
+
+      .bag-message {
+        margin: 12px 0 0;
+        color: #465448;
+        font-size: 14px;
+      }
+
+      .bag-message:empty {
+        display: none;
+      }
+
+      .shipping {
+        margin-top: 18px;
+        color: #73766c;
+        text-align: center;
+        font-size: 12px;
+      }
+
+      .benefits {
+        display: flex;
+        gap: 24px;
+        margin-top: 28px;
+        color: #60645a;
+        font-size: 13px;
+      }
+
+      @media (max-width: 760px) {
+        main {
+          padding: 22px 18px 55px;
+        }
+
+        .product {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+
+        .gallery img {
+          height: min(110vw, 470px);
+        }
+
+        .details {
+          padding-top: 0;
+        }
+
+        h1 {
+          font-size: 32px;
+        }
+
+        .benefits {
+          flex-wrap: wrap;
+          gap: 12px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div style="margin-bottom:10px;">
+        <a href="index.html">Back to Home</a>
+      </div>
+      <section class="product" aria-label="Product details">
+        <div class="gallery">
+          <img
+            src="https://coohom-biz-sg-s3.coohom.com/ins/static/case/diseno-interiores-habitaciones-dormitorio-moderno-1774328805015994300.jpg?processFlag=true&x-oss-process=image%2Fformat%2Cwebp"
+            alt="Modern bedroom interior design with warm neutral tones"
+          />
+
+          <div class="thumbs" aria-label="More product views">
+            <img
+              src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=180&q=80"
+              alt="Living room view 1"
+              tabindex="0"
+              role="button"
+              aria-label="Show living room view 1"
+            />
+            <img
+              src="https://coohom-biz-sg-s3.coohom.com/ins/static/case/diseno-interiores-habitaciones-dormitorio-moderno-1774328805015994300.jpg?processFlag=true&x-oss-process=image%2Fformat%2Cwebp"
+              alt="Modern bedroom interior design with warm neutral tones"
+              class="selected"
+              tabindex="0"
+              role="button"
+              aria-label="Show bedroom view 2"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?auto=format&fit=crop&w=180&q=80"
+              alt="Living room view 3"
+              tabindex="0"
+              role="button"
+              aria-label="Show living room view 3"
+            />
+          </div>
+        </div>
+
+        <div class="details">
+          <h1>Modern Home Decor Set</h1>
+          <div class="price">$79.99</div>
+          <p class="description">
+            Fresh and stylish essentials for your home, designed to make everyday
+            living feel more comfortable and elegant.
+          </p>
+          <div class="purchase">
+            <button class="primary" type="button">Add to bag</button>
+          </div>
+          <p class="bag-message" role="status" aria-live="polite"></p>
+          <hr class="rule" />
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const mainImage = document.querySelector('.gallery > img');
+      const thumbnails = document.querySelectorAll('.thumbs img');
+      const addButton = document.querySelector('.primary');
+      const bagMessage = document.querySelector('.bag-message');
+      const productName = document.querySelector('h1').textContent;
+
+      addButton.addEventListener('click', () => {
+        bagMessage.textContent = `${productName} has been added to your bag.`;
+      });
+
+      function selectImage(thumbnail) {
+        const imageUrl = new URL(thumbnail.src);
+        imageUrl.searchParams.set('w', '1200');
+        mainImage.src = imageUrl.href;
+        mainImage.alt = thumbnail.alt;
+        thumbnails.forEach((image) =>
+          image.classList.toggle('selected', image === thumbnail)
+        );
+      }
+
+      thumbnails.forEach((thumbnail) => {
+        thumbnail.addEventListener('click', () => selectImage(thumbnail));
+
+        thumbnail.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            selectImage(thumbnail);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

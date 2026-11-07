@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Desk Essentials</title>
+     <style>
+        :root {
+            --bg: #f3efe9;
+            --panel: rgba(255, 255, 255, 0.8);
+            --card: #ffffff;
+            --text: #1b1b1b;
+            --muted: #65615d;
+            --shadow: rgba(0, 0, 0, 0.12);
+            --accent: #c97a45;
+            --accent-dark: #a75d2c;
+            --line: rgba(27, 27, 27, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--bg), #e6dfd8);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 32px 18px;
+        }
+
+        .page-shell {
+            width: min(1180px, 100%);
+            background: rgba(255, 255, 255, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 28px;
+            box-shadow: 0 20px 60px rgba(44, 33, 24, 0.12);
+            padding: 24px 28px 32px;
+            backdrop-filter: blur(6px);
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 6px 8px 22px;
+        }
+
+        .brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.95rem;
+            opacity: 0.7;
+        }
+
+        .cart-btn {
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--text);
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .shop-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 32px;
+            align-items: center;
+            padding: 10px 6px 20px;
+        }
+
+        .product-copy {
+            padding: 10px 8px 10px 14px;
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            color: var(--accent-dark);
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2.4rem, 4vw, 4rem);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+        }
+
+        .subtitle {
+            margin: 18px 0 0;
+            max-width: 540px;
+            color: var(--muted);
+            font-size: 1.06rem;
+            line-height: 1.6;
+        }
+
+        .rating-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 24px;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .stars {
+            color: #e5b64b;
+            letter-spacing: 0.12em;
+            font-size: 1rem;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 26px;
+        }
+
+        .price {
+            font-size: clamp(2rem, 3vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.05em;
+        }
+
+        .tag {
+            background: rgba(201, 122, 69, 0.12);
+            color: var(--accent-dark);
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .options {
+            margin-top: 26px;
+        }
+
+        .option-label {
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pill {
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--text);
+            border-radius: 999px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .pill.active {
+            border-color: transparent;
+            background: #1b1b1b;
+            color: white;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .primary,
+        .secondary {
+            border: none;
+            border-radius: 999px;
+            padding: 16px 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            box-shadow: 0 12px 24px rgba(166, 93, 44, 0.25);
+            border-radius: 4px;
+        }
+
+        .secondary {
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--text);
+            border: 1px solid var(--line);
+        }
+
+        .features {
+            margin: 26px 0 0;
+            padding-left: 18px;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .product-visual {
+            position: relative;
+        }
+
+        .image-frame {
+            overflow: hidden;
+            margin: 0;
+            border-radius: 26px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.14);
+            background: #d9d2ca;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .gallery-item {
+            margin: 0;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(27, 27, 27, 0.08);
+            background: #e2ddd7;
+            box-shadow: 0 12px 20px rgba(27, 27, 27, 0.06);
+        }
+
+        .gallery-item.active {
+            border-color: rgba(201, 122, 69, 0.4);
+            box-shadow: 0 12px 24px rgba(201, 122, 69, 0.15);
+        }
+
+        .thumbs {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .thumbs img {
+            display: block;
+            width: 100%;
+            height: 108px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid #e8e7e1;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .thumbs img.selected {
+            border-color: rgba(186, 139, 75, 0.9);
+            box-shadow: 0 0 0 1px rgba(186, 139, 75, 0.35);
+        }
+
+        .thumbs img:hover {
+            transform: translateY(-2px);
+            border-color: rgba(186, 139, 75, 0.7);
+        }
+
+        .thumbs img:focus-visible {
+            outline: 2px solid rgba(186, 139, 75, 0.8);
+            outline-offset: 2px;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: min(75vh, 650px);
+            object-fit: cover;
+        }
+
+        .gallery-item img {
+            height: 130px;
+            object-fit: cover;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.56);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 20px;
+            padding: 22px 20px;
+        }
+
+        .info-card h2 {
+            margin: 0 0 8px;
+            font-size: 1.1rem;
+        }
+
+        .info-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 860px) {
+            .shop-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav {
+                justify-content: center;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .page-shell {
+                padding: 18px 14px 22px;
+            }
+
+            .nav {
+                gap: 12px 18px;
+            }
+
+            .cta-row {
+                flex-direction: column;
+            }
+
+            .primary,
+            .secondary {
+                width: 100%;
+            }
+        }
+
+        /* Minimal product-page design */
+        :root {
+            --text: #292b25;
+            --muted: #77796f;
+            --accent: #ba8b4b;
+            --accent-dark: #7b806f;
+            --line: #deded7;
+        }
+
+        body {
+            display: block;
+            min-height: 100vh;
+            padding: 0;
+            color: #292b25;
+            background: #faf9f6;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .page-shell {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 30px 24px 80px;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+
+        .shop-layout {
+            grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr);
+            gap: 64px;
+            align-items: start;
+            padding: 0;
+        }
+
+        .product-visual {
+            order: -1;
+        }
+
+        .image-frame {
+            border: 0;
+            border-radius: 4px;
+            box-shadow: none;
+            background: transparent;
+        }
+
+        .product-gallery {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .gallery-item {
+            border-radius: 4px;
+            border: 1px solid #e8e7e1;
+            box-shadow: none;
+        }
+
+        .image-frame img {
+            height: 600px;
+            border-radius: 4px;
+        }
+
+        .gallery-item img {
+            height: 108px;
+        }
+
+        .product-copy {
+            padding: 22px 0 0;
+        }
+
+        .eyebrow {
+            margin: 0;
+            color: #7b806f;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+        }
+
+        h1 {
+            margin: 13px 0 10px;
+            font: 500 39px/1.18 'Playfair Display', Georgia, serif;
+            letter-spacing: 0;
+        }
+
+        .rating-row {
+            gap: 0;
+            margin-top: 22px;
+            color: #ba8b4b;
+            font-size: 14px;
+        }
+
+        .stars {
+            color: #ba8b4b;
+        }
+
+        .rating-row > span + span {
+            color: #77796f;
+            margin-left: 8px;
+            font-size: 13px;
+        }
+
+        .subtitle,
+        .features {
+            color: #77796f;
+        }
+
+        .pill.active {
+            background: #303b31;
+        }
+
+        .primary {
+            background: #303b31;
+            box-shadow: none;
+        }
+
+        .info-card {
+            background: #fff;
+            border: 1px solid #e8e7e1;
+            border-radius: 4px;
+        }
+
+        .info-card p {
+            color: #77796f;
+        }
+
+        @media (max-width: 860px) {
+            .shop-layout {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .product-visual {
+                order: 0;
+            }
+
+            .image-frame img {
+                height: min(600px, 70vw);
+            }
+        }
+
+        @media (max-width: 540px) {
+            .page-shell {
+                padding: 24px 18px 50px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <div style="margin-bottom:10px;">
+        <a href="index.html" style="color: #303b31; text-decoration: none;">Back to Home</a>
+      </div>
+        <main class="shop-layout">
+            <section class="product-copy">
+                <h1>Minimal Desk Essentials</h1>
+                <p class="subtitle">A warm, streamlined workspace setup designed to make every day feel calm, productive, and beautifully organized.</p>
+
+                <div class="rating-row">
+                </div>
+
+                <div class="price-row">
+                    <span class="price">$89.00</span>
+                </div>
+
+                <div class="cta-row">
+                    <button class="primary" type="button">Add to bag</button>
+                </div>
+                <p class="cart-status" role="status" aria-live="polite"></p>
+
+                <ul class="features">
+                </ul>
+            </section>
+
+            <section class="product-visual" aria-label="Minimal desk essentials product photo">
+                <figure class="image-frame">
+                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80" alt="Bright modern office workspace" />
+                </figure>
+
+                <div class="thumbs" aria-label="More product views">
+                    <img
+                                            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=180&q=80"
+                                            data-full="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"
+                                            alt="Bright modern office workspace"
+                                            class="selected"
+                      tabindex="0"
+                      role="button"
+                                            aria-label="Show workspace view"
+                                            aria-pressed="true"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=180&q=80"
+                                            data-full="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80"
+                      alt="Bright, modern office with shared workspaces"
+                      tabindex="0"
+                      role="button"
+                      aria-label="Show bedroom view 2"
+                                            aria-pressed="false"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=180&q=80"
+                                            data-full="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"
+                      alt="Bright modern office workspace with desks"
+                      tabindex="0"
+                      role="button"
+                      aria-label="Show living room view 3"
+                                            aria-pressed="false"
+                    />
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+   
+    <script>
+        const mainImage = document.querySelector('.image-frame img');
+        const thumbnails = document.querySelectorAll('.thumbs img');
+        const addToBagButton = document.querySelector('.primary');
+        const cartStatus = document.querySelector('.cart-status');
+
+        addToBagButton.addEventListener('click', () => {
+            cartStatus.textContent = 'Minimal Desk Essentials added to your bag.';
+            addToBagButton.textContent = 'Added to bag ✓';
+        });
+
+        function selectThumbnail(thumbnail) {
+            mainImage.src = thumbnail.dataset.full || thumbnail.src;
+            mainImage.alt = thumbnail.alt;
+
+            thumbnails.forEach((image) => {
+                const isSelected = image === thumbnail;
+                image.classList.toggle('selected', isSelected);
+                image.setAttribute('aria-pressed', String(isSelected));
+            });
+        }
+
+        thumbnails.forEach((thumbnail) => {
+            thumbnail.addEventListener('click', () => selectThumbnail(thumbnail));
+            thumbnail.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    selectThumbnail(thumbnail);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
